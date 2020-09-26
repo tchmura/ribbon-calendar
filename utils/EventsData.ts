@@ -1,6 +1,6 @@
 export const eventsData = [
   {
-    name: 'Event 1',
+    name: 'Event 1 and some longer name to test out fdsf df adf dfd fd fdafds ',
     startsAt: '2020-11-07T16:50:00Z',
     endsAt: '2020-11-07T18:00:00Z',
     duration: 'P0Y0M0DT1H30M0S',
@@ -28,6 +28,30 @@ export const eventsData = [
     startsAt: '2020-11-22T09:30:00Z',
     endsAt: '2020-11-22T15:00:00Z',
     duration: 'P0Y0M0DT5H30M0S',
+  },
+  {
+    name: 'Event 6',
+    startsAt: '2020-10-02T15:30:00Z',
+    endsAt: '2020-10-02T18:00:00Z',
+    duration: 'P0Y0M0DT2H30M0S',
+  },
+  {
+    name: 'Event 6',
+    startsAt: '2020-10-02T15:30:00Z',
+    endsAt: '2020-10-02T18:00:00Z',
+    duration: 'P0Y0M0DT2H30M0S',
+  },
+  {
+    name: 'Event 6',
+    startsAt: '2020-10-02T15:30:00Z',
+    endsAt: '2020-10-02T18:00:00Z',
+    duration: 'P0Y0M0DT2H30M0S',
+  },
+  {
+    name: 'Event 6',
+    startsAt: '2020-10-02T15:30:00Z',
+    endsAt: '2020-10-02T18:00:00Z',
+    duration: 'P0Y0M0DT2H30M0S',
   },
   {
     name: 'Event 6',

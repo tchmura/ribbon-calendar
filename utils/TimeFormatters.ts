@@ -5,6 +5,6 @@ import momentDurationSetup from 'moment-duration-format'
 // @ts-ignore
 momentDurationSetup(moment)
 
-export function durationToHoursMinutes(duration: string) {
-  return moment.duration(duration, 'milliseconds').format('hh:mm')
+export function durationToMinutes(duration: string) {
+  return moment.duration(duration, 'milliseconds').format('mm')
 }

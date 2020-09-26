@@ -1,0 +1,28 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "prettier",
+        "prettier/react"
+    ],
+    "plugins": [
+        "@typescript-eslint",
+        "import",
+        "react",
+        "react-hooks",
+        "prettier"
+    ],
+    "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "prettier/prettier": "error",
+        "linebreak-style": "off"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "sourceType": "module"
+      }
+}

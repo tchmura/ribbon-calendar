@@ -6,6 +6,7 @@ import { EventData, eventsData } from '../utils/EventsData'
 import { EventCard } from '../components/indexPage/EventCard'
 import { durationToMinutes } from '../utils/TimeFormatters'
 import { EventCalendar } from '../components/indexPage/EventCalendar'
+import { PaymentForm } from '../components/shared/PaymentForm'
 
 const StyledIndexPage = styled.div`
   display: flex;
@@ -54,6 +55,7 @@ const IndexPage = () => {
           />
         ))}
       </StyledEventCards>
+      <PaymentForm />
     </StyledIndexPage>
   )
 }

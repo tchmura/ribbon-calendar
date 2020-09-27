@@ -3,9 +3,9 @@ import { useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 import { EventData, eventsData } from '../utils/EventsData'
-import { Calendar } from '../components/shared/Calendar'
 import { EventCard } from '../components/indexPage/EventCard'
 import { durationToMinutes } from '../utils/TimeFormatters'
+import { EventCalendar } from '../components/indexPage/EventCalendar'
 
 const StyledIndexPage = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ const IndexPage = () => {
 
   return (
     <StyledIndexPage>
-      <Calendar date={activeDate} disablePast shouldDisableDate={shouldDisableDate} onChange={handleDateChange} />
+      <EventCalendar date={activeDate} disablePast shouldDisableDate={shouldDisableDate} onChange={handleDateChange} />
       <StyledEventCards>
         {getEventsForDate(activeDate, eventsData).map((event: EventData, idx) => (
           <EventCard

@@ -3,6 +3,7 @@ import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
 import { Button } from '@material-ui/core'
 import styled from 'styled-components'
+import { useForm } from 'react-hook-form'
 
 const StyledInputs = styled.div`
   margin-top: 2.5rem;
@@ -26,15 +27,35 @@ const StyledTerms = styled.div`
   margin-bottom: 0.5rem;
 `
 
-export const PaymentForm = () => {
+export type FormValues = {
+  firstName: string
+  lastName: string
+  email: string
+  confirmEmail: string
+}
+
+const StyledTextField = styled(TextField)`
+  min-height: 5rem;
+`
+
+type Props = {
+  onSubmit: (values: FormValues) => void
+}
+
+export const PaymentForm = ({ onSubmit }: Props) => {
+  const { register, handleSubmit, errors, getValues, formState } = useForm({ mode: 'onBlur' })
+  const { isValid } = formState
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <StyledInputs>
-        <TextField
+        <StyledTextField
           id={'first name'}
           name={'firstName'}
           placeholder={'First Name'}
           label={'First Name'}
+          required
+          FormHelperTextProps={{ children: 'looool' }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -42,12 +63,18 @@ export const PaymentForm = () => {
               </InputAdornment>
             ),
           }}
+          inputRef={register({
+            required: 'Required',
+          })}
+          error={!!errors.firstName}
+          helperText={errors.firstName && errors.firstName.message}
         />
-        <TextField
+        <StyledTextField
           id={'last name'}
           name={'lastName'}
           placeholder={'Last Name'}
           label={'Last Name'}
+          required
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -55,12 +82,18 @@ export const PaymentForm = () => {
               </InputAdornment>
             ),
           }}
+          inputRef={register({
+            required: 'Required',
+          })}
+          error={!!errors.lastName}
+          helperText={errors.lastName && errors.lastName.message}
         />
-        <TextField
+        <StyledTextField
           id={'email'}
           name={'email'}
           placeholder={'Email'}
           label={'Email'}
+          required
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -68,12 +101,22 @@ export const PaymentForm = () => {
               </InputAdornment>
             ),
           }}
+          inputRef={register({
+            required: 'Required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'Invalid format of email address',
+            },
+          })}
+          error={!!errors.email}
+          helperText={errors.email && errors.email.message}
         />
-        <TextField
+        <StyledTextField
           id={'confirm email'}
           name={'confirmEmail'}
           placeholder={'Confirm Email'}
           label={'Confirm Email'}
+          required
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -81,15 +124,25 @@ export const PaymentForm = () => {
               </InputAdornment>
             ),
           }}
+          inputRef={register({
+            required: 'Required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'Invalid format of email address',
+            },
+            validate: (value) => value === getValues('email'),
+          })}
+          error={!!errors.confirmEmail}
+          helperText={errors.confirmEmail && errors.confirmEmail.message}
         />
       </StyledInputs>
       <StyledTerms>
         By submitting below, you agree to our{' '}
-        <a href={'https://ribbonexperiences.com'} target={'__blank'} noreferrer noopener>
+        <a href={'https://ribbonexperiences.com'} target={'__blank'} rel="noreferrer noopener">
           Terms of Service
         </a>
       </StyledTerms>
-      <StyledSubmit type={'submit'} color={'primary'} variant={'contained'}>
+      <StyledSubmit type={'submit'} color={'primary'} variant={'contained'} disabled={!isValid}>
         BOOK NOW
       </StyledSubmit>
     </StyledForm>

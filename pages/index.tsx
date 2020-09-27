@@ -6,7 +6,8 @@ import { EventData, eventsData } from '../utils/EventsData'
 import { EventCard } from '../components/indexPage/EventCard'
 import { durationToMinutes } from '../utils/TimeFormatters'
 import { EventCalendar } from '../components/indexPage/EventCalendar'
-import { PaymentForm } from '../components/shared/PaymentForm'
+import { EventPaymentModal } from '../components/indexPage/EventPaymentModal'
+import { FormValues } from '../components/shared/PaymentForm'
 
 const StyledIndexPage = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ const getEventsForDate = (date: Moment, eventsList: EventData[]) => {
 
 const IndexPage = () => {
   const [activeDate, setActiveDate] = useState(moment(moment.now()))
+  const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null)
   const activeDates = useMemo(() => {
     return eventsData.map((eventData: EventData) => moment(eventData.startsAt))
     // in reality this would be dynamic so I leave it in deps
@@ -36,6 +38,9 @@ const IndexPage = () => {
       setActiveDate(date)
     }
   }
+
+  const onSubmit = (values: FormValues, eventId: number) =>
+    console.log(`Submitting form values: ${JSON.stringify(values)} for event with id ${eventId}`)
 
   const shouldDisableDate = (date: Moment | null) => {
     return !activeDates.some((activeDate) => activeDate.isSame(date, 'day'))
@@ -48,14 +53,20 @@ const IndexPage = () => {
         {getEventsForDate(activeDate, eventsData).map((event: EventData, idx) => (
           <EventCard
             key={idx}
+            onClick={() => setSelectedEvent(event)}
             eventName={event.name}
             eventDuration={`${durationToMinutes(event.duration)} min`}
-            eventStartsAt={moment(event.startsAt).format('HH:MM')}
-            eventEndsAt={moment(event.endsAt).format('HH:MM')}
+            eventStartsAt={moment(event.startsAt).format('HH:mm')}
+            eventEndsAt={moment(event.endsAt).format('HH:mm')}
           />
         ))}
       </StyledEventCards>
-      <PaymentForm />
+      <EventPaymentModal
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        eventData={selectedEvent}
+        onSubmit={onSubmit}
+      />
     </StyledIndexPage>
   )
 }

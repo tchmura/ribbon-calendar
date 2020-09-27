@@ -25,7 +25,7 @@ const StyledEventCard = styled(Card)`
   text-align: center;
   display: grid;
   row-gap: 0.1rem;
-  cursor: pointer;
+  cursor: ${(props) => (props.onClick ? 'pointer' : 'initial')};
 `
 
 const StyledBold = styled.span`
@@ -37,7 +37,7 @@ type Props = {
   eventDuration: string
   eventStartsAt: string
   eventEndsAt: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 export const EventCard = ({ eventName, eventDuration, eventStartsAt, eventEndsAt, onClick }: Props) => {

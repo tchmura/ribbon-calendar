@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BLUE_BRAND, TEAL_BRAND, VIOLET_BRAND } from '../../constants/colors'
 import { Card } from '../shared/Card'
@@ -41,8 +41,16 @@ type Props = {
 }
 
 export const EventCard = ({ eventName, eventDuration, eventStartsAt, eventEndsAt, onClick }: Props) => {
+  const [isRaised, setIsRaised] = useState(true)
+
   return (
-    <StyledEventCard raised variant={'elevation'} onClick={onClick}>
+    <StyledEventCard
+      raised={isRaised}
+      onMouseOver={() => onClick && setIsRaised(false)}
+      onMouseOut={() => onClick && setIsRaised(true)}
+      variant={'elevation'}
+      onClick={onClick}
+    >
       <StyledName>{eventName}</StyledName>
       <StyledStartsAt>{`at ${eventStartsAt}`}</StyledStartsAt>
       <StyledDuration>

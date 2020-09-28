@@ -8,3 +8,7 @@ momentDurationSetup(moment)
 export function durationToMinutes(duration: string) {
   return moment.duration(duration, 'milliseconds').format('mm')
 }
+
+export function dateToHoursMinutes(date: string) {
+  return moment(date).format('HH:mm')
+}

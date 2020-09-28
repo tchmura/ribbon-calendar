@@ -4,10 +4,11 @@ import styled from 'styled-components'
 
 import { EventData, eventsData } from '../utils/EventsData'
 import { EventCard } from '../components/indexPage/EventCard'
-import { durationToMinutes } from '../utils/TimeFormatters'
+import { dateToHoursMinutes, durationToMinutes } from '../utils/TimeFormatters'
 import { EventCalendar } from '../components/indexPage/EventCalendar'
 import { EventPaymentModal } from '../components/indexPage/EventPaymentModal'
 import { FormValues } from '../components/shared/PaymentForm'
+import { EventDate } from '../components/indexPage/EventDate'
 
 const StyledIndexPage = styled.div`
   display: flex;
@@ -29,7 +30,7 @@ const IndexPage = () => {
   const [activeDate, setActiveDate] = useState(moment(moment.now()))
   const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null)
   const activeDates = useMemo(() => {
-    return eventsData.map((eventData: EventData) => moment(eventData.startsAt))
+    return eventsData.map((eventData: EventData) => moment(eventData.startsAt, moment.ISO_8601))
     // in reality this would be dynamic so I leave it in deps
   }, [eventsData])
 
@@ -49,6 +50,7 @@ const IndexPage = () => {
   return (
     <StyledIndexPage>
       <EventCalendar date={activeDate} disablePast shouldDisableDate={shouldDisableDate} onChange={handleDateChange} />
+      <EventDate date={activeDate} />
       <StyledEventCards>
         {getEventsForDate(activeDate, eventsData).map((event: EventData, idx) => (
           <EventCard
@@ -56,8 +58,8 @@ const IndexPage = () => {
             onClick={() => setSelectedEvent(event)}
             eventName={event.name}
             eventDuration={`${durationToMinutes(event.duration)} min`}
-            eventStartsAt={moment(event.startsAt).format('HH:mm')}
-            eventEndsAt={moment(event.endsAt).format('HH:mm')}
+            eventStartsAt={dateToHoursMinutes(event.startsAt)}
+            eventEndsAt={dateToHoursMinutes(event.endsAt)}
           />
         ))}
       </StyledEventCards>

@@ -13,6 +13,7 @@ import { EventDate } from '../components/indexPage/EventDate'
 const StyledIndexPage = styled.div`
   display: flex;
   flex-direction: column;
+  align-content: center;
 `
 
 const StyledEventCards = styled.div`
@@ -49,7 +50,7 @@ const IndexPage = () => {
 
   return (
     <StyledIndexPage>
-      <EventCalendar date={activeDate} disablePast shouldDisableDate={shouldDisableDate} onChange={handleDateChange} />
+      <EventCalendar value={activeDate} shouldDisableDate={shouldDisableDate} onChange={handleDateChange} />
       <EventDate date={activeDate} />
       <StyledEventCards>
         {getEventsForDate(activeDate, eventsData).map((event: EventData, idx) => (

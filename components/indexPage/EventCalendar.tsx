@@ -1,13 +1,26 @@
-import { Calendar as CalendarMaterial } from '@material-ui/pickers'
 import { ComponentProps } from 'react'
 import { createMuiTheme } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 
-import { Calendar } from '../shared/Calendar'
+import { DatePicker } from '../shared/DatePicker'
 import { TEAL_BRAND, TEAL_ULTRA_LIGHT } from '../../constants/colors'
 
 const themeOverride = createMuiTheme({
   overrides: {
+    MuiPickersDatePickerRoot: {
+      toolbar: {
+        display: 'none',
+      },
+    },
+    MuiPickersBasePicker: {
+      container: {
+        placeContent: 'center',
+        marginBottom: '1rem',
+      },
+      pickerView: {
+        alignSelf: 'center',
+      },
+    },
     MuiPickersDay: {
       day: {
         backgroundColor: TEAL_ULTRA_LIGHT,
@@ -20,10 +33,10 @@ const themeOverride = createMuiTheme({
   },
 })
 
-export const EventCalendar = ({ ...props }: ComponentProps<typeof CalendarMaterial>) => {
+export const EventCalendar = ({ ...props }: ComponentProps<typeof DatePicker>) => {
   return (
     <ThemeProvider theme={themeOverride}>
-      <Calendar {...props} />
+      <DatePicker disablePast variant={'static'} {...props} />
     </ThemeProvider>
   )
 }

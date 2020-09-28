@@ -7,7 +7,7 @@
     "start": "next start",
     "tsc": "tsc",
     "prettier": "./node_modules/.bin/prettier --write \"pages/**/*.{ts,tsx}\" \"components/**/*.{ts,tsx}\" \"utils/**/*.{ts,tsx}\" \"constants/**/*.{ts,tsx}\"",
-    "eslint": "node ./node_modules/eslint/bin/eslint.js components pages --ext .ts,.tsx"
+    "eslint": "node ./node_modules/eslint/bin/eslint.js components pages utils --ext .ts,.tsx"
   },
   "dependencies": {
     "@date-io/moment": "1.x",

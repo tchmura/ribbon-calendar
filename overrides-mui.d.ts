@@ -4,6 +4,15 @@ type overridesNameToClassKey = {
   [P in keyof MuiPickersOverrides]: keyof MuiPickersOverrides[P]
 }
 
+type CustomType = {
+  MuiPickersBasePicker: {
+    pickerView: {
+      alignSelf?: string
+    }
+  }
+}
+
 declare module '@material-ui/core/styles/overrides' {
-  export interface ComponentNameToClassKey extends overridesNameToClassKey {}
+  interface ComponentNameToClassKey extends overridesNameToClassKey {}
+  export interface ComponentNameToClassKey extends CustomType {}
 }

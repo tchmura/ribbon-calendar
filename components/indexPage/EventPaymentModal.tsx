@@ -4,7 +4,7 @@ import moment from 'moment'
 import CloseIcon from '@material-ui/icons/Close'
 import styled from 'styled-components'
 
-import { durationToMinutes } from '../../utils/TimeFormatters'
+import { dateToHoursMinutes, durationToMinutes } from '../../utils/TimeFormatters'
 import { FormValues, PaymentForm } from '../shared/PaymentForm'
 import { EventCard } from './EventCard'
 import { EventData } from '../../utils/EventsData'
@@ -49,7 +49,7 @@ export const EventPaymentModal = ({ isOpen, onSubmit, onClose, eventData }: Prop
             eventName={eventData.name}
             eventDuration={`${durationToMinutes(eventData.duration)} min`}
             eventStartsAt={moment(eventData.startsAt).format('HH:mm MMMM-D-YYYY')}
-            eventEndsAt={moment(eventData.endsAt).format('HH:mm')}
+            eventEndsAt={dateToHoursMinutes(eventData.endsAt)}
           />
         )}
         <StyledCloseIcon onClick={onClose}>

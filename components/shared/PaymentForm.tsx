@@ -55,7 +55,6 @@ export const PaymentForm = ({ onSubmit }: Props) => {
           placeholder={'First Name'}
           label={'First Name'}
           required
-          FormHelperTextProps={{ children: 'looool' }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
